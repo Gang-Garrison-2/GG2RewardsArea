@@ -21,7 +21,7 @@ if ($context['user']['is_guest']) {
     try {
         // Connect to DB
         if (isset($config['DBUsername'])) {
-            PDO = new PDO($config['DB'], $config['DBUsername'], $config['DBPassword']);
+            $PDO = new PDO($config['DB'], $config['DBUsername'], $config['DBPassword']);
         } else {
             $PDO = new PDO($config['DB']);
         }
