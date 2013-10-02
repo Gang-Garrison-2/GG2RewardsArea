@@ -12,11 +12,11 @@ if (isset($config['RedirectFrom'])) {
 
 if ($context['user']['is_guest']) {
     $loggedin = false;
-    $rewards = [];
+    $rewards = array();
 } else {
     $loggedin = true;
     $forum_id = (int)$context['user']['id'];
-    $rewards = [];
+    $rewards = array();
 
     try {
         // Connect to DB
@@ -32,11 +32,11 @@ if ($context['user']['is_guest']) {
                     user
             WHERE
                     forumId = :forumId;');
-        $s->execute([':forumId' => $forum_id]);
+        $s->execute(array(':forumId' => $forum_id));
         $rows = $s->fetchAll(PDO::FETCH_ASSOC);
         // Not in DB => No rewards
         if (empty($rows)) {
-            $rewards = [];
+            $rewards = array();
         } else {
             $user_id = $rows[0]['id'];
             $secret_key = $rows[0]['secretKey'];
@@ -55,15 +55,15 @@ if ($context['user']['is_guest']) {
                         user_flag.id_flag = flag.id
                 WHERE
                         id_user = :id;');
-            $s->execute([':id' => $user_id]);
-            $rewards = [];
+            $s->execute(array(':id' => $user_id));
+            $rewards = array();
             foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $row) {
-                $rewards[] = [
+                $rewards[] = array(
                     'id' => $row['id_flag'],
                     'enabled' => (bool)$row['enabled'],
                     'description' => $row['description'],
                     'field_name' => $row['id_flag'] . '_enabled'
-                ];
+                );
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,9 +78,9 @@ if ($context['user']['is_guest']) {
                             WHERE
                                     id_user = :id
                                     AND id_flag = :flag;');
-                        $s->execute([':id' => $user_id,
+                        $s->execute(array(':id' => $user_id,
                                     ':flag' => $reward['id'],
-                                    ':enabled' => $newValue]);
+                                    ':enabled' => $newValue));
                         $reward['enabled'] = $newValue;
                     }
                 }
@@ -90,8 +90,6 @@ if ($context['user']['is_guest']) {
         die("Error: " . $e->getMessage());
     }
 }
-
-$loggedin = true;
 
 require_once 'template.php';
 
