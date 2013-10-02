@@ -1,5 +1,5 @@
 <?php
-$config = [
+$config = array(
     // PDO DSN string
     'DB' => 'sqlite:./test.db',
     // Username and Password (specify both or neither)
@@ -8,4 +8,4 @@ $config = [
     // Redirect (optional; omit items if unneeded)
     'RedirectFrom' => 'ganggarrison.com',
     'RedirectTo' => 'www.ganggarrison.com'
-];
+);
