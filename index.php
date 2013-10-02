@@ -71,7 +71,7 @@ if ($context['user']['is_guest']) {
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                foreach ($rewards as &$reward) {
+                foreach ($rewards as $key => $reward) {
                     $newValue = (array_key_exists($reward['field_name'], $_POST));
                     if ($newValue !== $reward['enabled']) {
                         $s = $PDO->prepare('
@@ -86,6 +86,7 @@ if ($context['user']['is_guest']) {
                                     ':flag' => $reward['id'],
                                     ':enabled' => $newValue));
                         $reward['enabled'] = $newValue;
+                        $rewards[$key] = $reward;
                     }
                 }
             }
