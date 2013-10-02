@@ -20,7 +20,11 @@ if ($context['user']['is_guest']) {
 
     try {
         // Connect to DB
-        $PDO = new PDO($config['DB']);
+        if (isset($config['DBUsername'])) {
+            PDO = new PDO($config['DB'], $config['DBUsername'], $config['DBPassword']);
+        } else {
+            $PDO = new PDO($config['DB']);
+        }
         $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Find our ID and Secret Key
