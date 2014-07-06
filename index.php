@@ -24,6 +24,8 @@ function connectDB() {
 // So the template can hide unnecessary details if GG2 logged them in automatically
 $gg2_login = isset($_GET['gg2_login']) && $_GET['gg2_login'] === 'yes';
 
+$message = '';
+
 if (isset($_GET['reward_id'], $_GET['reward_key'])) {
     $loggedin = true;
     $user_id = $_GET['reward_id'];
@@ -129,6 +131,7 @@ try {
                             ':enabled' => $newValue));
                 $reward['enabled'] = $newValue;
                 $rewards[$key] = $reward;
+                $message .= ($newValue ? 'Enabled' : 'Disabled') . ' ' . $reward['description'] . PHP_EOL;
             }
         }
     }

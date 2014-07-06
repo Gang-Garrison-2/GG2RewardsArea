@@ -27,6 +27,13 @@ endif;
         </thead>
         <tbody>
 <?php
+    if ($message):
+?>
+    <?=nl2br(htmlspecialchars($message))?>
+<?php
+    endif;
+?>
+<?php
     if (!$loggedin):
 ?>
         <tr>
