@@ -17,6 +17,14 @@ endif;
 ?>
 </div>
 <form method=post>
+<?php
+    // IE workaround
+    foreach ($_GET as $param => $value):
+?>
+        <input type=hidden name="<?=htmlspecialchars($param)?>" value="<?=htmlspecialchars($value)?>">
+<?php
+    endforeach;
+?>
     <table>
         <thead>
             <tr>

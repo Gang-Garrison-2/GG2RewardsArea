@@ -22,14 +22,14 @@ function connectDB() {
 }
 
 // So the template can hide unnecessary details if GG2 logged them in automatically
-$gg2_login = isset($_GET['gg2_login']) && $_GET['gg2_login'] === 'yes';
+$gg2_login = isset($_REQUEST['gg2_login']) && $_REQUEST['gg2_login'] === 'yes';
 
 $message = '';
 
-if (isset($_GET['reward_id'], $_GET['reward_key'])) {
+if (isset($_REQUEST['reward_id'], $_REQUEST['reward_key'])) {
     $loggedin = true;
-    $user_id = $_GET['reward_id'];
-    $secret_key = $_GET['reward_key'];
+    $user_id = $_REQUEST['reward_id'];
+    $secret_key = $_REQUEST['reward_key'];
     try {
         connectDB();
         // Check our ID and Secret Key
