@@ -7,7 +7,7 @@
 <div id=desc>
     <p>This is where you can manage your Haxxy rewards.</p>
 <?php
-if ($loggedin):
+if ($loggedin && !$gg2_login):
 ?>
     <p>Here are your <em>personal</em> reward details, to add to <code>gg2.ini</code>:</p>
     <p><code>[Haxxy]<br>RewardId=<?=$user_id?><br>RewardKey=<?=$secret_key?></code></p>
@@ -30,13 +30,13 @@ endif;
     if (!$loggedin):
 ?>
         <tr>
-            <td colspan=2>You need to <a href="/forums/index.php?action=login">log in to the forums</a> to select rewards.</td>
+            <td colspan=3>You need to <a href="/forums/index.php?action=login">log in to the forums</a> to select rewards.</td>
         </tr>
 <?php
     elseif (empty($rewards)):
 ?>
         <tr>
-            <td colspan=2>You have no rewards.</td>
+            <td colspan=3>You have no rewards.</td>
         </tr>
 <?php
     else:
