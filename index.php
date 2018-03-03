@@ -128,7 +128,7 @@ try {
                             AND id_flag = :flag;');
                 $s->execute(array(':id' => $user_id,
                             ':flag' => $reward['id'],
-                            ':enabled' => $newValue));
+                            ':enabled' => ($newValue ? 1 : 0)));
                 $reward['enabled'] = $newValue;
                 $rewards[$key] = $reward;
                 $message .= ($newValue ? 'Enabled' : 'Disabled') . ' ' . $reward['description'] . PHP_EOL;
